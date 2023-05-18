@@ -1,0 +1,53 @@
+
+service: rds-test
+
+custom:
+  vpc:
+    securityGroupIds:
+      -  sg-0b387398b1d7ef602
+    subnetIds:  
+      - subnet-08aee610fd2812ea6
+      - subnet-05e582676376f160a
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+  stage: dev
+  region: ap-southeast-1
+
+functions:
+  getAvailableSlots:
+    handler: getAvailableSlots.handler
+    vpc: ${self:custom.vpc}
+    timeout: 30
+    events:
+      - http:
+          path: getAvailableSlots/{resource}
+          method: get
+  createAppointment:
+    handler: createAppointment.handler
+    vpc: ${self:custom.vpc}
+    timeout: 30
+    events:
+      - http:
+          path: appointment
+          method: post
+  cancelAppointment:
+    handler: cancelAppointment.handler
+    vpc: ${self:custom.vpc}
+    timeout: 30
+    events:
+      - http:
+          path: appointment/cancel
+          method: post
+  getPersonAppointments:
+    handler: getPersonAppointments.handler
+    vpc: ${self:custom.vpc}
+    timeout: 30
+    events:
+      - http:
+          path: appointment/{person_id}
+          method: get
