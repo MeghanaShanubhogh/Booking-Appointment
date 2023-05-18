@@ -5,6 +5,7 @@ The `cdk.json` file tells the CDK Toolkit how to execute your app.
 
 # serverless-test/rds-test
 ![image](https://github.com/MeghanaShanubhogh/Booking-Appointment/assets/115886543/3a7286dc-8f47-429d-9401-fc7fb11edda5)
+
 using Lambda and serverless architecture we deployed the lambda and used the Api's generated to create, cancel the appointment in the database.
 
 ## Useful commands - CDK
